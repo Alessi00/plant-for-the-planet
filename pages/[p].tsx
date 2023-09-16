@@ -44,6 +44,7 @@ export default function Donate({
     project,
     setSelectedSite,
     setProject,
+    selectedPl,
     setSelectedPl,
     plantLocations,
     setShowSingleProject,
@@ -146,7 +147,7 @@ export default function Donate({
         setSelectedSite(siteIndex);
       }
     }
-  }, [setSelectedSite, geoJson, project]);
+  }, [geoJson, project]);
 
   React.useEffect(() => {
     //for selecting one of the plant location. if user use link  to directly visit to plantLocation from home page
@@ -159,10 +160,12 @@ export default function Donate({
       if (singlePlantLocation === undefined) {
         router.push(`/${project.slug}`);
       } else {
-        setSelectedPl(singlePlantLocation);
+        if (selectedPl === undefined) {
+          setSelectedPl(singlePlantLocation);
+        }
       }
     }
-  }, [router, router.query.ploc, plantLocations, setSelectedPl, project]);
+  }, [router.query.ploc, plantLocations, project]);
 
   return (
     <>
